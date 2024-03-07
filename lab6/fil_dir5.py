@@ -1,6 +1,5 @@
 #Write a Python program to write a list to a file.
-n=input()
-thislist=list(n)
+items = ['Mango', 'Orange', 'Apple', 'Lemon']
 with open("f2.txt",'w') as f:
-    for i in thislist:
-        f.write(str(i)+" ")
+    for i in items:
+        f.write(i + "\n")

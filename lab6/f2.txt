@@ -1,3 +1,4 @@
-hello everyone!
-this is a just simple text 
-with no context
+Mango
+Orange
+Apple
+Lemon
