@@ -1,0 +1,24 @@
+CREATE OR REPLACE PROCEDURE add_new_phone(
+	new_name varchar,
+        new_surname varchar,
+	new_number varchar
+) 
+AS $$
+DECLARE
+    next_id INT;
+BEGIN
+    IF EXISTS (SELECT 1 FROM phone WHERE name = new_name AND surname = new_surname) THEN
+        UPDATE phone SET number = new_number WHERE name = new_name AND surname = new_surname;
+    ELSE
+        SELECT MAX(id) + 1 INTO next_id FROM phone;
+        IF next_id IS NULL THEN
+            next_id = 1;
+        END IF;
+        INSERT INTO phone (id, name, surname, number) VALUES (next_id, new_name, new_surname, new_number);
+    END IF;
+END;
+$$
+LANGUAGE PLPGSQL;
+
+
+

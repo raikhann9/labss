@@ -1,0 +1,14 @@
+CREATE OR REPLACE PROCEDURE insert_some_users(names TEXT[], surnames TEXT[], phones TEXT[])
+AS $$
+DECLARE
+    i INT;
+BEGIN
+    FOR i IN 1..array_length(names, 1) LOOP
+        IF length(phones[i]) = 11 AND phones[i] ~ '^[0-9]+$' THEN
+            INSERT INTO phone (name, surname, number) VALUES (names[i], surnames[i], phones[i]);
+        ELSE
+            RAISE NOTICE 'Invalid phone number: %', phones[i];
+        END IF;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;

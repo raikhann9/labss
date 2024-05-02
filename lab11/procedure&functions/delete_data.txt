@@ -1,0 +1,7 @@
+CREATE OR REPLACE PROCEDURE delete_data(data text) 
+AS $$
+BEGIN
+    DELETE FROM phone WHERE name = data OR surname = data OR number = data;
+    
+END;
+$$ LANGUAGE plpgsql;

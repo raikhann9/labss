@@ -1,0 +1,12 @@
+CREATE OR REPLACE FUNCTION records_pagination(
+    lim integer,
+    offs integer
+) RETURNS SETOF phone AS $$
+BEGIN
+    RETURN QUERY
+    SELECT * FROM phone
+    ORDER BY name
+    LIMIT lim
+    OFFSET offs;
+END;
+$$ LANGUAGE plpgsql;

@@ -1,0 +1,13 @@
+CREATE OR REPLACE FUNCTION search_patterns(pattern text)
+  RETURNS TABLE(phone_id INT, phone_name VARCHAR, phone_surname VARCHAR, phone_number VARCHAR) AS 
+$$
+BEGIN
+  RETURN QUERY
+  SELECT id AS phone_id, name AS phone_name, surname AS phone_surname, number AS phone_number
+  FROM phone
+  WHERE (name LIKE '%' || pattern || '%')
+    OR (surname LIKE '%' || pattern || '%')
+    OR (number LIKE '%' || pattern || '%');
+END; 
+$$
+LANGUAGE plpgsql;
